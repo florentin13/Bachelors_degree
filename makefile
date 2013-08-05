@@ -2,7 +2,7 @@
 #run example
 #make build CODE="some_file_name"
 
-CODE = "pni"
+CODE = "virtualCockpit"
 
 
 all: clear build run
