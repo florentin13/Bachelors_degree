@@ -1,6 +1,6 @@
 
 #run example
-#make build CODE="001white_rectangle"
+#make build CODE="some_file_name"
 
 CODE = "pni"
 
