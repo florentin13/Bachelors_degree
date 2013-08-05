@@ -35,6 +35,8 @@ int bytesRead = 0;
 
 static float quaternion[4];
 
+static GLuint texName;
+
 //----------------------------------------------------------------------------------
 // OpenCV Video stream functions
 CvCapture* g_Capture;
@@ -73,7 +75,7 @@ void pni_read() {
 	// framerate, my webcam only gets ~15 fps
 	IplImage * image = cvQueryFrame(g_Capture);
 
-	cvFlip(image, NULL, 0);
+	//cvFlip(image, NULL, 0);
 
 	// Image is memory aligned which means we there may be extra space at the end
 	// of each row. gluBuild2DMipmaps needs contiguous data, so we buffer it here
@@ -88,6 +90,21 @@ void pni_read() {
 		memcpy(&buffer[i*width*channels],&(data[i*step]),width*channels);
 
 	// Create Texture
+	/*
+*/
+	
+   glClearColor (0.0, 0.0, 0.0, 0.0);
+   glShadeModel(GL_FLAT);
+   glEnable(GL_DEPTH_TEST);
+
+   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+   glGenTextures(1, &texName);
+   glBindTexture(GL_TEXTURE_2D, texName);
+
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexImage2D(
 		GL_TEXTURE_2D,
 		0,
@@ -117,37 +134,25 @@ void init(void) {
 
 void display(void) {
 
-
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnable(GL_TEXTURE_2D);
-	// These are necessary if using glTexImage2D instead of gluBuild2DMipmaps
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
-
-	// Set Projection Matrix
-	glMatrixMode (GL_PROJECTION);
-	glLoadIdentity();
-	gluOrtho2D(0, frame_width, frame_height, 0);
-
-	// Switch to Model View Matrix
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-	// Draw a textured quad
-	glBegin(GL_QUADS);
-		glTexCoord2f(0.0f, 0.0f); glVertex3f(100, 100, 1);
-		glTexCoord2f(1.0f, 0.0f); glVertex3f(frame_width-100, 100, -1);
-		glTexCoord2f(1.0f, 1.0f); glVertex3f(frame_width-100, frame_height-100, -1);
-		glTexCoord2f(0.0f, 1.0f); glVertex3f(100, frame_height-100, 1);
-	glEnd();
+   glEnable(GL_TEXTURE_2D);
+   glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
+   glBindTexture(GL_TEXTURE_2D, texName);
+   glBegin(GL_QUADS);
+   glTexCoord2f(0.0, 0.0); glVertex3f(-1.0, -1.0, 0.0);
+   glTexCoord2f(0.0, 1.0); glVertex3f(-1.0, 1.0, 0.0);
+   glTexCoord2f(1.0, 1.0); glVertex3f(1.0, 1.0, 0.0);
+   glTexCoord2f(1.0, 0.0); glVertex3f(1.0, -1.0, 0.0);
+   glEnd();
+   glFlush();
+   glDisable(GL_TEXTURE_2D);
 
 
    glColor3f (1.0, 1.0, 1.0);
    glPushMatrix();
+   glTranslatef (0.0, 0.0, 1.0);
 	glRotatef ((GLfloat) quaternion[0]*100, (GLfloat) quaternion[1]*100, (GLfloat) quaternion[2]*100, (GLfloat) quaternion[3]*100);
-   glutWireSphere(1.0, 20, 16);   /* draw sun */
+   glutWireSphere(1.0, 20, 16); 
    glPopMatrix();
 
 	glFlush();
@@ -158,10 +163,10 @@ void reshape (int w, int h) {
    glViewport (0, 0, (GLsizei) w, (GLsizei) h); 
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity ();
-   gluPerspective(60.0, (GLfloat) w/(GLfloat) h, 1.0, 20.0);
+   gluPerspective(60.0, (GLfloat) w/(GLfloat) h, 1.0, 30.0);
    glMatrixMode(GL_MODELVIEW);
    glLoadIdentity();
-	gluLookAt (0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+	gluLookAt (0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 }
 
 void keyboard(unsigned char ch, int x, int y){
