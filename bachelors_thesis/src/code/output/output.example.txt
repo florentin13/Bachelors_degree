@@ -1,0 +1,23 @@
+Monitored syscalls are: 
+3 4 5 6 
+Getting system call trace for ../test/program_test
+driver contains 10 syscall entries
+Malware graph:V[10]={ (0 sc=5), (1 sc=6), (2 sc=5), (3 sc=3), (4 sc=6), (5 sc=5), (6 sc=4), (7 sc=4), (8 sc=4), (9 sc=6), };
+E[10]={ (0, 1), (2, 3), (2, 4), (5, 6), (5, 7), (5, 8), (5, 9), (6, 7), (6, 8), (7, 8), };
+
+Analyzing malware vs ../test/diff_test
+Getting system call trace for ../test/diff_test
+driver contains 11 syscall entries
+Benign graph:V[11]={ (0 sc=5), (1 sc=6), (2 sc=5), (3 sc=3), (4 sc=6), (5 sc=5), (6 sc=6), (7 sc=5), (8 sc=4), (9 sc=3), (10 sc=6), };
+E[7]={ (0, 1), (2, 3), (2, 4), (5, 6), (7, 8), (7, 9), (7, 10), };
+
+-1 -1 -1 -1 -1 0 -1 -1 -1 1 
+-1 -1 -1 -1 -1 7 -1 -1 8 10 
+-1 -1 0 -1 1 7 -1 -1 8 10 
+-1 -1 2 3 4 7 -1 -1 8 10 
+0 1 2 3 4 7 -1 -1 8 10 
+
+Malspecs found:
+Malspec 0
+V[2]={ (0 sc=4), (1 sc=4), };
+E[1]={ (0, 1), };

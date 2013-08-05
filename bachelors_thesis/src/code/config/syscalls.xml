@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<syscalls>
+	<syscall no="2" name="fork">
+		<ebx type="int"    dir="in"/>
+	</syscall>
+	<syscall no="3" name="read">
+		<ebx type="fd"     dir="in"/>
+		<ecx type="pvoid"  dir="out"/>
+	</syscall>
+	<syscall no="4" name="write">
+		<ebx type="fd"     dir="in"/>
+		<ecx type="pvoid"  dir="in"/>
+	</syscall>
+	<syscall no="5" name="open">
+		<ebx type="pchar"  dir="in"/>
+		<ecx type="int"    dir="in"/>
+		<edx type="ushort" dir="in"/>
+		<ret type="fd"     dir="out"/>
+	</syscall>
+	<syscall no="6" name="close">
+		<ebx type="fd"     dir="in"/>
+		<ret type="void"   dir="none"/>
+	</syscall>
+	<syscall no="8"  name="creat">
+		<ebx type="pchar"  dir="in"/>
+		<ecx type="ushort" dir="in"/>
+		<ret type="fd"     dir="out"/>
+	</syscall>
+	<syscall no="9" name="link">
+		<ebx type="pchar"  dir="in"/>
+		<ecx type="pchar"  dir="in"/>
+	</syscall>
+	<syscall no="10" name="unlink">
+		<ebx type="pchar"  dir="in"/>
+	</syscall>
+	<syscall no="11" name="execve">
+		<ebx type="pchar"  dir="in"/>
+		<ecx type="pchar"  dir="in"/>
+		<edx type="pchar"  dir="in"/>
+	</syscall>
+	<syscall no="12" name="chdir">
+		<ebx type="pchar"  dir="in"/>
+	</syscall>
+	<syscall no="15" name="chmod">
+		<ebx type="pchar"  dir="in"/>
+		<ecx type="ushort" dir="in"/>
+	</syscall>
+	<syscall no="16" name="lchown">
+		<ebx type="pchar"  dir="in"/>
+		<ecx type="ushort" dir="in"/>
+		<edx type="ushort" dir="in"/>
+	</syscall>
+	<syscall no="19" name="lseek">
+		<ebx type="fd"     dir="in"/>
+		<ecx type="int"    dir="in"/>
+		<edx type="int"    dir="in"/>
+	</syscall>
+	<syscall no="20" name="getpid">
+		<ret type="int"    dir="out"/>
+	</syscall>
+	<syscall no="23" name="setuid">
+		<ebx type="uint"   dir="in"/>
+	</syscall>
+	<syscall no="24" name="getuid">
+		<ret type="uint"   dir="out"/>
+	</syscall>
+	<syscall no="33" name="access">
+		<ebx type="pchar"  dir="in"/>
+		<ecx type="int"    dir="in"/>
+	</syscall>
+	<syscall no="37" name="kill">
+		<ebx type="uint"   dir="in"/>
+		<ecx type="int"    dir="in"/>
+	</syscall>
+	<syscall no="38" name="rename">
+		<ebx type="pchar"  dir="in"/>
+		<ecx type="pchar"  dir="in"/>
+	</syscall>
+	<syscall no="39" name="mkdir">
+		<ebx type="pchar"  dir="in"/>
+		<ebx type="ushort" dir="in"/>
+	</syscall>
+</syscalls>

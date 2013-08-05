@@ -1,0 +1,18 @@
+--------------------------------------------------------------------------------
+Desenarea unui cerc:
+#define PI 3.1415926535898 
+GLint circle_points = 100; 
+glBegin(GL_LINE_LOOP); 
+for (i = 0; i < circle_points; i++) {    
+   angle = 2*PI*i/circle_points; 
+   glVertex2f(cos(angle), sin(angle)); 
+} 
+glEnd();
+// Mai bine sunt retinute valorile lui cos si sin intr-un vector si apoi
+desenate. Consuma resurse multe la desenarea mai multor cercuri
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+

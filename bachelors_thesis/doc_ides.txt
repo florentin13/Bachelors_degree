@@ -1,0 +1,24 @@
+
+================================================================================
+	Idei noi
+--------------------------------------------------------------------------------
+	Detalii despre librariile folosite ( libusb, OpenCV, OpenGL )
+--------------------------------------------------------------------------------
+
+================================================================================
+	Prezentare sesiunea de comunicari
+--------------------------------------------------------------------------------
+	- prezentarea idei de realitate augmentata
+	- de unde mi-a venit ideea
+		avionul iese din raza si nu mai poate fi controlat
+		control mai usor
+		poate fi folosit ca un simulator
+	- utilitate
+	- proiecte similare
+	- prezentare proiect:
+		- resurse HW
+		- resurse SW
+	- imbunatatiri
+--------------------------------------------------------------------------------
+
+
