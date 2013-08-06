@@ -3,6 +3,8 @@
 	Idei noi
 --------------------------------------------------------------------------------
 	Detalii despre librariile folosite ( libusb, OpenCV, OpenGL )
+	Descriere si aplicabilitate quaternioni
+	quaternion to axis angles
 --------------------------------------------------------------------------------
 
 ================================================================================

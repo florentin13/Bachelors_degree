@@ -30,7 +30,6 @@ inline static void allocateOnDemand( IplImage **img, CvSize size, int depth, int
 int main() {
 
 	/* Create an object that decodes the input video stream. */
-	//CvCapture *input_video = cvCaptureFromFile("nunta.avi");
 	CvCapture* input_video = cvCreateCameraCapture(0);
 	DIE(input_video == NULL, "Can't open video.");
 
@@ -183,6 +182,8 @@ int main() {
 		/* For fun (and debugging :)), let's draw the flow field. */
 		for(int i = 0; i < number_of_features; i++) {
 
+			printf("optical_flow_found_feature[%d] = %d\n", i, optical_flow_found_feature[i]);
+
 			/* If Pyramidal Lucas Kanade didn't really find the feature, skip it. */
 			if(optical_flow_found_feature[i] == 0)
 				continue;
@@ -241,7 +242,7 @@ int main() {
 		 * If the argument is 0 then it waits forever otherwise it waits that number of milliseconds.
 		 * The return value is the key the user pressed. */
 		int key_pressed;
-		key_pressed = cvWaitKey(100);
+		key_pressed = cvWaitKey(0);
 
 		/* If the users pushes "b" or "B" go back one frame.
 		 * Otherwise go forward one frame. */
